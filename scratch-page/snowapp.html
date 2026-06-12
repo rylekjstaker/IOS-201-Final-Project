@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utah Snow Resort Picker</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #00b4d8;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #aaaaaa;
+            font-size: 1.1em;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .question {
+            margin-bottom: 30px;
+        }
+
+        .question h3 {
+            color: #00b4d8;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1em;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            background: rgba(0,180,216,0.3);
+            border-color: #00b4d8;
+        }
+
+        .option-btn.selected {
+            background: rgba(0,180,216,0.4);
+            border-color: #00b4d8;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #00b4d8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover { background: #0096b7; }
+
+        .result {
+            display: none;
+            max-width: 600px;
+            margin: 20px auto;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid #00b4d8;
+            text-align: center;
+        }
+
+        .result h2 {
+            color: #00b4d8;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .result .resort-tag {
+            display: inline-block;
+            background: #00b4d8;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 5px;
+        }
+
+        .result p {
+            color: #cccccc;
+            line-height: 1.7;
+            margin: 15px 0;
+        }
+
+        .result .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat .number {
+            font-size: 2em;
+            color: #00b4d8;
+            font-weight: bold;
+        }
+
+        .stat .label {
+            font-size: 0.8em;
+            color: #aaaaaa;
+        }
+
+        .retry-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: transparent;
+            color: #00b4d8;
+            border: 1px solid #00b4d8;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .retry-btn:hover {
+            background: #00b4d8;
+            color: white;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav a {
+            color: #00b4d8;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>⛷️ Utah Resort Picker</h1>
+    <p>Answer a few questions and find your perfect mountain</p>
+</header>
+
+<nav>
+    <a href="snowboarding.html">← Back to Snowboarding</a>
+    <a href="../index.html">Portfolio</a>
+</nav>
+
+<div class="quiz-container" id="quiz">
+
+    <div class="question">
+        <h3>1. What kind of snow do you prefer?</h3>
+        <div class="options">
+            <button class="option-btn" onclick="select(this, 'snow', 'powder')">🌨️ Deep powder — the deeper the better</button>
+            <button class="option-btn" onclick="select(this, 'snow', 'groomed')">🎿 Groomed runs — smooth and fast</button>
+            <button class="option-btn" onclick="select(this, 'snow', 'both')">😎 Either works for me</button>
+        </div>
+    </div>
+
+    <div class="question">
+        <h3>2. What's your skill level?</h3>
+        <div class="options">
+            <button class="option-btn" onclick="select(this, 'skill', 'beginner')">🟢 Beginner — still learning</button>
+            <button class="option-btn" onclick="select(this, 'skill', 'intermediate')">🔵 Intermediate — comfortable on most runs</button>
+            <button class="option-btn" onclick="select(this, 'skill', 'advanced')">⚫ Advanced — give me the blacks and double blacks</button>
+        </div>
+    </div>
+
+    <div class="question">
+        <h3>3. What's your vibe for the day?</h3>
+        <div class="options">
+            <button class="option-btn" onclick="select(this, 'vibe', 'chill')">😌 Chill — relaxed runs, good views</button>
+            <button class="option-btn" onclick="select(this, 'vibe', 'party')">🎉 Lively — après ski, good energy</button>
+            <button class="option-btn" onclick="select(this, 'vibe', 'serious')">💪 Serious — max vertical, no distractions</button>
+        </div>
+    </div>
+
+    <div class="question">
+        <h3>4. How far are you willing to drive from Provo/SLC?</h3>
+        <div class="options">
+            <button class="option-btn" onclick="select(this, 'distance', 'close')">🚗 Under 45 minutes</button>
+            <button class="option-btn" onclick="select(this, 'distance', 'medium')">🚙 Up to 1.5 hours</button>
+            <button class="option-btn" onclick="select(this, 'distance', 'far')">🛻 I'll drive as far as it takes</button>
+        </div>
+    </div>
+
+    <button class="submit-btn" onclick="getResult()">Find My Resort 🏔️</button>
+</div>
+
+<div class="result" id="result">
+    <h2 id="resort-name"></h2>
+    <div id="resort-tags"></div>
+    <div class="stats" id="resort-stats"></div>
+    <p id="resort-desc"></p>
+    <p id="resort-tip"></p>
+    <button class="retry-btn" onclick="retry()">Try Again</button>
+</div>
+
+<script>
+    const answers = {};
+
+    const resorts = {
+        brighton: {
+            name: "Brighton Resort",
+            tags: ["Night Skiing", "Powder", "Beginner Friendly"],
+            stats: [
+                { number: "1,875", label: "Acres" },
+                { number: "1,745ft", label: "Vertical Drop" },
+                { number: "66", label: "Trails" }
+            ],
+            desc: "Brighton is beloved for its deep Utah powder and relaxed vibe. It's one of the few resorts that allows snowboarders on all terrain and has a great community feel.",
+            tip: "💡 Pro tip: Hit the Millicent lift first thing for untouched powder stashes."
+        },
+        snowbird: {
+            name: "Snowbird",
+            tags: ["Expert Terrain", "Massive Vertical", "Deep Powder"],
+            stats: [
+                { number: "2,500", label: "Acres" },
+                { number: "3,240ft", label: "Vertical Drop" },
+                { number: "169", label: "Trails" }
+            ],
+            desc: "Snowbird is one of the most challenging and rewarding resorts in the country. With over 500 inches of snowfall annually and massive vertical, it's a paradise for advanced riders.",
+            tip: "💡 Pro tip: The tram to Hidden Peak gives you access to some of the best untracked lines on the mountain."
+        },
+        parkcity: {
+            name: "Park City Mountain",
+            tags: ["Largest in US", "Après Ski", "All Levels"],
+            stats: [
+                { number: "7,300", label: "Acres" },
+                { number: "3,226ft", label: "Vertical Drop" },
+                { number: "330", label: "Trails" }
+            ],
+            desc: "Park City is the largest ski resort in the US with something for everyone. The town has amazing restaurants, nightlife, and a world-class après ski scene.",
+            tip: "💡 Pro tip: Stay on the Park City side for groomers, head to Canyons side for powder stashes."
+        },
+        sundance: {
+            name: "Sundance Mountain Resort",
+            tags: ["Scenic", "Uncrowded", "Beginner Friendly"],
+            stats: [
+                { number: "450", label: "Acres" },
+                { number: "2,150ft", label: "Vertical Drop" },
+                { number: "42", label: "Trails" }
+            ],
+            desc: "Sundance is Robert Redford's hidden gem. It's never crowded, stunningly beautiful, and perfect for a relaxed day on the mountain without the chaos of bigger resorts.",
+            tip: "💡 Pro tip: Go on a weekday for an almost empty mountain experience."
+        },
+        deervalley: {
+            name: "Deer Valley Resort",
+            tags: ["Groomed Runs", "Luxury", "Intermediate"],
+            stats: [
+                { number: "2,026", label: "Acres" },
+                { number: "3,000ft", label: "Vertical Drop" },
+                { number: "103", label: "Trails" }
+            ],
+            desc: "Deer Valley is famous for its impeccably groomed runs and luxury experience. The mountain is ski-only (no snowboards) but the grooming and service are unmatched.",
+            tip: "💡 Pro tip: The grooming crews work overnight — first chair gets you perfect corduroy every time."
+        }
+    };
+
+    function select(btn, category, value) {
+        const parent = btn.closest('.question');
+        parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        answers[category] = value;
+    }
+
+    function getResult() {
+        if (Object.keys(answers).length < 4) {
+            alert('Please answer all 4 questions!');
+            return;
+        }
+
+        let resort = pickResort();
+        showResult(resort);
+    }
+
+    function pickResort() {
+        const { snow, skill, vibe, distance } = answers;
+
+        if (skill === 'advanced' && snow === 'powder') return resorts.snowbird;
+        if (skill === 'advanced' && vibe === 'serious') return resorts.snowbird;
+        if (vibe === 'party' || distance === 'far') return resorts.parkcity;
+        if (snow === 'groomed' && vibe !== 'party') return resorts.deervalley;
+        if (skill === 'beginner' && vibe === 'chill') return resorts.sundance;
+        if (snow === 'powder' && skill === 'intermediate') return resorts.brighton;
+        if (distance === 'close') return resorts.brighton;
+        return resorts.parkcity;
+    }
+
+    function showResult(resort) {
+        document.getElementById('quiz').style.display = 'none';
+        const result = document.getElementById('result');
+        result.style.display = 'block';
+
+        document.getElementById('resort-name').textContent = resort.name;
+        
+        document.getElementById('resort-tags').innerHTML = 
+            resort.tags.map(t => `<span class="resort-tag">${t}</span>`).join('');
+
+        document.getElementById('resort-stats').innerHTML =
+            resort.stats.map(s => `
+                <div class="stat">
+                    <div class="number">${s.number}</div>
+                    <div class="label">${s.label}</div>
+                </div>
+            `).join('');
+
+        document.getElementById('resort-desc').textContent = resort.desc;
+        document.getElementById('resort-tip').textContent = resort.tip;
+    }
+
+    function retry() {
+        Object.keys(answers).forEach(k => delete answers[k]);
+        document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        document.getElementById('quiz').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
