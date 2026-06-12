@@ -1,0 +1,88 @@
+/* Font and background */
+body {
+    font-family: 'Georgia', serif;
+    background-color: #1a1a2e;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+#navbar {
+    background-color: #16213e;
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+}
+
+#navbar a {
+    color: #00b4d8;
+    text-decoration: none;
+    margin-right: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+#navbar a:hover {
+    color: #ffffff;
+}
+
+/* Hero */
+#hero {
+    background-color: #0f3460;
+    text-align: center;
+    padding: 100px 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+#hero h1 {
+    font-size: 4em;
+    color: #00b4d8;
+}
+
+#hero a {
+    color: #ffffff;
+    font-size: 1.2em;
+}
+
+/* About */
+#about {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+    font-family: 'Georgia', serif;
+    color: #e0e0e0;
+}
+
+/* Resorts */
+#resorts {
+    background-color: #16213e;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+#resorts img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+/* Video */
+#video {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #0f3460;
+}
+
+/* Footer */
+#footer {
+    background-color: #16213e;
+    text-align: center;
+    padding: 20px;
+    color: #aaaaaa;
+    font-family: 'Arial', sans-serif;
+}
+
+#footer a {
+    color: #00b4d8;
+}
