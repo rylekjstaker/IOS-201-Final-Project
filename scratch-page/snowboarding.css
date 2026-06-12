@@ -26,20 +26,20 @@ body {
     color: #ffffff;
 }
 
-/* Hero */
-#hero {
+/* Header */
+#head {
     background-color: #0f3460;
     text-align: center;
     padding: 100px 20px;
     font-family: 'Arial', sans-serif;
 }
 
-#hero h1 {
+#head h1 {
     font-size: 4em;
     color: #00b4d8;
 }
 
-#hero a {
+#head a {
     color: #ffffff;
     font-size: 1.2em;
 }
