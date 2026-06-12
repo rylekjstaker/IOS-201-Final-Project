@@ -86,3 +86,14 @@ body {
 #footer a {
     color: #00b4d8;
 }
+
+#tableau {
+    padding: 60px 20px;
+    background-color: #16213e;
+    text-align: center;
+}
+
+#tableau h2 {
+    color: #00b4d8;
+    margin-bottom: 30px;
+}
